@@ -124,6 +124,15 @@ h2{font-size:clamp(34px,5vw,62px);line-height:1.1;margin:10px 0 0;font-weight:70
 .socials a{padding:10px 16px;border:1px solid var(--line);border-radius:999px;font-family:var(--en);font-size:14px}
 .socials a:hover{border-color:var(--teal)}
 @media (max-width:760px){.about .box{grid-template-columns:1fr}}
+.cform{max-width:640px;display:grid;gap:16px;margin-top:22px;border:1px solid var(--line);border-radius:28px;padding:clamp(22px,5vw,44px);background:radial-gradient(100% 140% at 100% 0%,rgba(94,242,214,.10),transparent 55%),var(--panel)}
+.cform label{display:grid;gap:8px;font-size:14px;color:var(--muted)}
+.cform input,.cform textarea{width:100%;font:inherit;font-size:16px;color:var(--fg);background:rgba(255,255,255,.04);border:1px solid var(--line);border-radius:14px;padding:13px 16px}
+.cform textarea{min-height:150px;resize:vertical}
+.cform input:focus,.cform textarea:focus{outline:none;border-color:var(--teal)}
+.cform .hp{position:absolute;left:-9999px}
+.cform button{justify-self:start;border:0;border-radius:999px;padding:14px 30px;font:inherit;font-weight:700;background:var(--teal);color:var(--ink);cursor:pointer}
+.cform button[disabled]{opacity:.6;cursor:wait}
+.cstatus{min-height:22px;font-size:14px}.cstatus.ok{color:var(--teal)}.cstatus.err{color:var(--coral)}
 footer{background:var(--ink);border-top:1px solid var(--line);color:var(--muted);font-size:14px}
 footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;padding-block:26px}
 
@@ -145,9 +154,9 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;
 <div id="site" data-lang="ar" dir="rtl">
 <header><div class="wrap nav">
   <a class="logo" href="#home"><i></i><span class="ar">تامر</span><span class="en">Tamer</span></a>
-  <nav class="links" aria-label="Main"><a href="#home" data-nav="home"><span class="ar">الرئيسية</span><span class="en">Home</span></a><a href="#work" data-nav="work"><span class="ar">الأعمال</span><span class="en">Work</span></a><a href="#about" data-nav="about"><span class="ar">عنّي</span><span class="en">About</span></a></nav>
+  <nav class="links" aria-label="Main"><a href="#home" data-nav="home"><span class="ar">الرئيسية</span><span class="en">Home</span></a><a href="#work" data-nav="work"><span class="ar">الأعمال</span><span class="en">Work</span></a><a href="#about" data-nav="about"><span class="ar">عنّي</span><span class="en">About</span></a><a href="#contact" data-nav="contact"><span class="ar">تواصل</span><span class="en">Contact</span></a></nav>
   <div class="lang" role="group" aria-label="Language"><button class="b-ar" type="button" data-set="ar" aria-pressed="true">عربي</button><button class="b-en" type="button" data-set="en" aria-pressed="false">EN</button></div>
-</div><nav class="wrap mnav" aria-label="Pages"><a href="#home" data-nav="home"><span class="ar">الرئيسية</span><span class="en">Home</span></a><a href="#work" data-nav="work"><span class="ar">الأعمال</span><span class="en">Work</span></a><a href="#about" data-nav="about"><span class="ar">عنّي</span><span class="en">About</span></a></nav></header>
+</div><nav class="wrap mnav" aria-label="Pages"><a href="#home" data-nav="home"><span class="ar">الرئيسية</span><span class="en">Home</span></a><a href="#work" data-nav="work"><span class="ar">الأعمال</span><span class="en">Work</span></a><a href="#about" data-nav="about"><span class="ar">عنّي</span><span class="en">About</span></a><a href="#contact" data-nav="contact"><span class="ar">تواصل</span><span class="en">Contact</span></a></nav></header>
 
 <main id="top">
   <section class="page" data-page="home"><div class="wrap hero">
@@ -170,6 +179,19 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;
         <p><span class="ar">التسويق الإلكتروني شغفي. تستهويني الطريقة التي تصل بها الفكرة إلى الناس، وكيف تتحول قصة علامة تجارية إلى محتوى يُشاهَد ويُتذكَّر. هذا الموقع مساحتي الشخصية لعرض بعض من أعمالي ومهاراتي.</span><span class="en">Digital marketing is my passion. I'm drawn to the way an idea reaches people, and how a brand's story turns into content that gets watched and remembered. This site is my personal space to show some of my work and skills.</span></p>
         <p><span class="ar">أوظّف الذكاء الاصطناعي بما يخدم الشغف والابتكار، لأصنع محتوى مختلفاً يحمل لمسة إبداعية حقيقية.</span><span class="en">I put AI to work in the service of passion and innovation, to create content that stands apart and carries a real creative touch.</span></p></div>
     </div>
+  </div></section>
+
+  <section class="page subpage" data-page="contact" hidden><div class="wrap" style="padding-block:clamp(40px,8vw,90px)">
+    <div class="kicker"><span class="ar">تواصل</span><span class="en">Contact</span></div>
+    <h2 style="margin:8px 0 0;font-size:clamp(28px,5vw,44px)"><span class="ar">راسلني</span><span class="en">Send me a message</span></h2>
+    <form class="cform" id="cform" novalidate>
+      <label><span><span class="ar">الاسم</span><span class="en">Name</span></span><input name="name" required maxlength="100" autocomplete="name"></label>
+      <label><span><span class="ar">البريد الإلكتروني</span><span class="en">Email</span></span><input name="email" type="email" required maxlength="200" autocomplete="email" dir="ltr"></label>
+      <label><span><span class="ar">الرسالة</span><span class="en">Message</span></span><textarea name="message" required maxlength="3000"></textarea></label>
+      <input class="hp" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+      <button type="submit"><span class="ar">إرسال</span><span class="en">Send</span></button>
+      <div class="cstatus" id="cstatus" role="status" aria-live="polite"></div>
+    </form>
   </div></section>
 </main>
 <footer><div class="wrap"><span><span class="ar">© ٢٠٢٦ تامر</span><span class="en">© 2026 Tamer</span></span><span><span class="ar">الإمارات</span><span class="en">UAE</span></span></div></footer>
@@ -241,7 +263,7 @@ let ITEMS=[
   document.getElementById('px').addEventListener('click',close);player.addEventListener('click',e=>{if(e.target===player)close();});
   addEventListener('keydown',e=>{if(e.key==='Escape'&&!player.hidden)close();});
   document.querySelectorAll('[data-set]').forEach(b=>b.addEventListener('click',()=>setLang(b.dataset.set)));
-  const PAGES=['home','work','about'];
+  const PAGES=['home','work','about','contact'];
   function route(){let h=location.hash.slice(1);if(h==='en'||h==='ar'){setLang(h);h='home';}if(!PAGES.includes(h))h='home';
     document.querySelectorAll('[data-page]').forEach(p=>p.hidden=p.dataset.page!==h);
     document.querySelectorAll('[data-nav]').forEach(a=>{if(a.dataset.nav===h)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current');});
@@ -250,6 +272,18 @@ let ITEMS=[
   let saved=null;try{saved=localStorage.getItem('lang');}catch(e){}
   if(location.hash==='#en')saved='en';
   setLang(saved==='en'?'en':'ar');route();
+  // Contact form -> Supabase table contact_messages (insert-only for the public key)
+  const cf=document.getElementById('cform'),cs=document.getElementById('cstatus');
+  const T={ar:{need:'يرجى تعبئة كل الحقول ببريد صحيح.',ok:'تم الإرسال. شكراً لرسالتك!',err:'تعذّر الإرسال، حاول مرة أخرى لاحقاً.',cfg:'نموذج التواصل غير مفعّل بعد.'},en:{need:'Please fill in all fields with a valid email.',ok:'Sent. Thank you for your message!',err:'Could not send. Please try again later.',cfg:'The contact form is not set up yet.'}};
+  cf.addEventListener('submit',async e=>{e.preventDefault();const L=T[lang],fd=new FormData(cf);cs.className='cstatus';
+    if(fd.get('website'))return; // bot
+    const name=String(fd.get('name')).trim(),email=String(fd.get('email')).trim(),message=String(fd.get('message')).trim();
+    if(!name||!message||!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)){cs.textContent=L.need;cs.classList.add('err');return;}
+    const C=window.SUPABASE_CONFIG;if(!C||!C.url||C.url.includes('YOUR-')){cs.textContent=L.cfg;cs.classList.add('err');return;}
+    const b=cf.querySelector('button');b.disabled=true;
+    try{const r=await fetch(C.url+'/rest/v1/contact_messages',{method:'POST',headers:{apikey:C.anonKey,Authorization:'Bearer '+C.anonKey,'Content-Type':'application/json',Prefer:'return=minimal'},body:JSON.stringify({name,email,message,lang})});
+      if(!r.ok)throw 0;cf.reset();cs.textContent=L.ok;cs.classList.add('ok');}catch(x){cs.textContent=L.err;cs.classList.add('err');}
+    b.disabled=false;});
   // Optional: load items from Supabase (config.js). Falls back to the built-in list.
   (async()=>{const C=window.SUPABASE_CONFIG;if(!C||!C.url||!C.anonKey||C.url.includes('YOUR-'))return;
     try{const r=await fetch(C.url+'/rest/v1/portfolio_items?select=*&published=eq.true&order=sort_order.asc',{headers:{apikey:C.anonKey,Authorization:'Bearer '+C.anonKey}});

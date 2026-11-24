@@ -281,12 +281,12 @@ let ITEMS=[
     if(!name||!message||!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)){cs.textContent=L.need;cs.classList.add('err');return;}
     const C=window.SUPABASE_CONFIG;if(!C||!C.url||C.url.includes('YOUR-')){cs.textContent=L.cfg;cs.classList.add('err');return;}
     const b=cf.querySelector('button');b.disabled=true;
-    try{const r=await fetch(C.url+'/rest/v1/contact_messages',{method:'POST',headers:{apikey:C.anonKey,Authorization:'Bearer '+C.anonKey,'Content-Type':'application/json',Prefer:'return=minimal'},body:JSON.stringify({name,email,message,lang})});
-      if(!r.ok)throw 0;cf.reset();cs.textContent=L.ok;cs.classList.add('ok');}catch(x){cs.textContent=L.err;cs.classList.add('err');}
+    try{const r=await fetch(C.url+'/rest/v1/contact_messages',{method:'POST',headers:Object.assign({apikey:C.anonKey,'Content-Type':'application/json',Prefer:'return=minimal'},C.anonKey.startsWith('eyJ')?{Authorization:'Bearer '+C.anonKey}:{}),body:JSON.stringify({name,email,message,lang})});
+      if(!r.ok){console.error('Supabase',r.status,await r.text());throw 0;}cf.reset();cs.textContent=L.ok;cs.classList.add('ok');}catch(x){cs.textContent=L.err;cs.classList.add('err');}
     b.disabled=false;});
   // Optional: load items from Supabase (config.js). Falls back to the built-in list.
   (async()=>{const C=window.SUPABASE_CONFIG;if(!C||!C.url||!C.anonKey||C.url.includes('YOUR-'))return;
-    try{const r=await fetch(C.url+'/rest/v1/portfolio_items?select=*&published=eq.true&order=sort_order.asc',{headers:{apikey:C.anonKey,Authorization:'Bearer '+C.anonKey}});
+    try{const r=await fetch(C.url+'/rest/v1/portfolio_items?select=*&published=eq.true&order=sort_order.asc',{headers:Object.assign({apikey:C.anonKey},C.anonKey.startsWith('eyJ')?{Authorization:'Bearer '+C.anonKey}:{})});
       if(!r.ok)return;const rows=await r.json();if(!rows.length)return;
       ITEMS=rows.map(x=>({type:x.type,src:x.src,poster:x.poster,ar:{t:x.title_ar,s:x.sub_ar},en:{t:x.title_en,s:x.sub_en}}));
       renderTabs();renderGrid();}catch(e){}})();

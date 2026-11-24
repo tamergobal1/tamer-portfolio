@@ -282,7 +282,8 @@ let ITEMS=[
     const C=window.SUPABASE_CONFIG;if(!C||!C.url||C.url.includes('YOUR-')){cs.textContent=L.cfg;cs.classList.add('err');return;}
     const b=cf.querySelector('button');b.disabled=true;
     try{const r=await fetch(C.url+'/rest/v1/contact_messages',{method:'POST',headers:Object.assign({apikey:C.anonKey,'Content-Type':'application/json',Prefer:'return=minimal'},C.anonKey.startsWith('eyJ')?{Authorization:'Bearer '+C.anonKey}:{}),body:JSON.stringify({name,email,message,lang})});
-      if(!r.ok){console.error('Supabase',r.status,await r.text());throw 0;}cf.reset();cs.textContent=L.ok;cs.classList.add('ok');}catch(x){cs.textContent=L.err;cs.classList.add('err');}
+      if(!r.ok){console.error('Supabase',r.status,await r.text());throw 0;}
+      if(C.notifyEmail){fetch('https://formsubmit.co/ajax/'+encodeURIComponent(C.notifyEmail),{method:'POST',headers:{'Content-Type':'application/json',Accept:'application/json'},body:JSON.stringify({name,email,message,_subject:'New message from Tamer Portfolio',_template:'table',_captcha:'false'})}).catch(()=>{});}cf.reset();cs.textContent=L.ok;cs.classList.add('ok');}catch(x){cs.textContent=L.err;cs.classList.add('err');}
     b.disabled=false;});
   // Optional: load items from Supabase (config.js). Falls back to the built-in list.
   (async()=>{const C=window.SUPABASE_CONFIG;if(!C||!C.url||!C.anonKey||C.url.includes('YOUR-'))return;
